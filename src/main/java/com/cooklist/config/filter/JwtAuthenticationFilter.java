@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import com.cooklist.config.JwtService;
 
@@ -23,9 +22,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
-	@Autowired
-	private HandlerExceptionResolver handlerExceptionResolver;
 	
 	@Autowired
 	private JwtService jwtService;
@@ -69,9 +65,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 			filterChain.doFilter(request, response);
 			
-		} catch (Exception exception) {
-			
-			handlerExceptionResolver.resolveException(request, response, null, exception);
+		} catch (Exception exc) {
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			response.sendError(HttpServletResponse.SC_FORBIDDEN, exc.getMessage());
+			return;
 			
 		}
 	}
