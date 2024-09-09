@@ -23,7 +23,7 @@ public class MealController {
 	private MealService mealService;
 
 	@GetMapping("/find-by-name/{name}")
-	public List<MealDto> findByName(@PathVariable(value = "name") @NotBlank String name) {
+	public List<MealDto> findByName(@PathVariable @NotBlank String name) {
 
 		return mealService.findByName(name);
 		
