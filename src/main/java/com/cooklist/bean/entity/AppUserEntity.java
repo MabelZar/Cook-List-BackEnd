@@ -24,6 +24,7 @@ public class AppUserEntity implements java.io.Serializable {
 	private static final long serialVersionUID = 2892972565198327204L;
 	private Integer id;
 	private String fullName;
+	private Integer quantityMembers;
 	private String email;
 	private String password;
 	private Set<MealProgrammingEntity> mealProgrammings = new HashSet<MealProgrammingEntity>(0);
@@ -65,6 +66,15 @@ public class AppUserEntity implements java.io.Serializable {
 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
+	}
+	
+	@Column(name= "quantity_members", nullable = false)
+	public Integer getQuantityMembers() {
+		return quantityMembers;
+	}
+
+	public void setQuantityMembers(Integer quantityMembers) {
+		this.quantityMembers = quantityMembers;
 	}
 
 	@Column(name = "email", unique = true, nullable = false, length = 50)

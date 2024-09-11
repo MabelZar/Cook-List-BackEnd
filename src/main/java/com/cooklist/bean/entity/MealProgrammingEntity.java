@@ -52,7 +52,7 @@ public class MealProgrammingEntity implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "meal_id", nullable = false)
+	@JoinColumn(name = "meal_id")
 	public MealEntity getMeal() {
 		return this.meal;
 	}

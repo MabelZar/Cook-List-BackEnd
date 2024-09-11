@@ -11,6 +11,7 @@ public class AppUserDto implements java.io.Serializable, UserDetails {
 	private static final long serialVersionUID = 3533274399641218950L;
 	private Integer id;
 	private String fullName;
+	private Integer quantityMembers;
 	private String email;
 	private String password;
 
@@ -35,6 +36,14 @@ public class AppUserDto implements java.io.Serializable, UserDetails {
 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
+	}
+	
+	public Integer getQuantityMembers() {
+		return quantityMembers;
+	}
+
+	public void setQuantityMembers(Integer quantityMembers) {
+		this.quantityMembers = quantityMembers;
 	}
 
 	public String getEmail() {

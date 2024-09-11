@@ -45,6 +45,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 		AppUserEntity appUserEntity = new AppUserEntity();
 		appUserEntity.setFullName(registerDto.getFullName());
+		appUserEntity.setQuantityMembers(registerDto.getQuantityMembers());
 		appUserEntity.setEmail(registerDto.getEmail());
 		appUserEntity.setPassword(passwordEncoder.encode(registerDto.getPassword()));
 

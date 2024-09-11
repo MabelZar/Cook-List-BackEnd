@@ -1,7 +1,6 @@
 package com.cooklist.layer.controller;
 
 import java.util.List;
-import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cooklist.bean.dto.IngredientSummaryDto;
 import com.cooklist.bean.dto.MealProgrammingDto;
+import com.cooklist.bean.dto.MeasuredIngredientDto;
 import com.cooklist.config.exception.CockListException;
 import com.cooklist.config.exception.ExceptionType;
 import com.cooklist.layer.service.MealProgrammingService;
@@ -33,8 +34,7 @@ public class MealProgrammingController {
 
 		for (MealProgrammingDto dto : dtos) {
 
-			if (ObjectUtils.anyNull(dto, dto.getProgramming(), dto.getMeal())
-					|| Objects.isNull(dto.getMeal().getId())) {
+			if (ObjectUtils.anyNull(dto, dto.getProgramming())) {
 
 				throw new CockListException(ExceptionType.VALIDATION, "la fecha o la comida no deben ser nulos");
 

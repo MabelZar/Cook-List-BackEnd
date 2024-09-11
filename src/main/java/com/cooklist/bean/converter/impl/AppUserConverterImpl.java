@@ -14,6 +14,7 @@ public class AppUserConverterImpl extends ABeanConverter<AppUserEntity, AppUserD
 
 		dto.setId(entity.getId());
 		dto.setFullName(entity.getFullName());
+		dto.setQuantityMembers(entity.getQuantityMembers());
 		dto.setEmail(entity.getEmail());
 		
 	}
@@ -23,6 +24,7 @@ public class AppUserConverterImpl extends ABeanConverter<AppUserEntity, AppUserD
 		
 		entity.setId(dto.getId());
 		entity.setFullName(dto.getFullName());
+		entity.setQuantityMembers(dto.getQuantityMembers());
 		entity.setEmail(dto.getEmail());
 		
 	}
