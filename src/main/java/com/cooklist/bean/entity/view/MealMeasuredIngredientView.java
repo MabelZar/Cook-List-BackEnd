@@ -1,7 +1,8 @@
 package com.cooklist.bean.entity.view;
 
-public class IngredientSummaryView {
+public class MealMeasuredIngredientView {
 
+	private Integer mealDetailId;
 	private Integer measuredIngredientId;
 	private Integer ingredientId;
 	private String ingredientName;
@@ -10,15 +11,14 @@ public class IngredientSummaryView {
 	private String measurementUnitSymbol;
 	private Double quantity;
 
-	public IngredientSummaryView(
-			Integer measuredIngredientId
-			, Integer ingredientId
-			, String ingredientName
-			, Integer measurementUnitId
-			, String measurementUnitName
-			, String measurementUnitSymbol
-			, Double quantity) {
+	public MealMeasuredIngredientView() {
+	}
+
+	public MealMeasuredIngredientView(Integer mealDetailId, Integer measuredIngredientId, Integer ingredientId,
+			String ingredientName, Integer measurementUnitId, String measurementUnitName, String measurementUnitSymbol,
+			Double quantity) {
 		super();
+		this.mealDetailId = mealDetailId;
 		this.measuredIngredientId = measuredIngredientId;
 		this.ingredientId = ingredientId;
 		this.ingredientName = ingredientName;
@@ -26,6 +26,14 @@ public class IngredientSummaryView {
 		this.measurementUnitName = measurementUnitName;
 		this.measurementUnitSymbol = measurementUnitSymbol;
 		this.quantity = quantity;
+	}
+
+	public Integer getMealDetailId() {
+		return mealDetailId;
+	}
+
+	public void setMealDetailId(Integer mealDetailId) {
+		this.mealDetailId = mealDetailId;
 	}
 
 	public Integer getMeasuredIngredientId() {
@@ -91,7 +99,5 @@ public class IngredientSummaryView {
 				+ ", measurementUnitName=" + measurementUnitName + ", measurementUnitSymbol=" + measurementUnitSymbol
 				+ ", quantity=" + quantity + "]";
 	}
-	
-	
 
 }

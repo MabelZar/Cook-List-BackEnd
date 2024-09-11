@@ -2,7 +2,7 @@ package com.cooklist.layer.service;
 
 import java.util.List;
 
-import com.cooklist.bean.dto.ConsolidatedIngredientSummaryDto;
+import com.cooklist.bean.dto.MealMeasuredIngredientDto;
 import com.cooklist.bean.dto.MealProgrammingDto;
 
 public interface MealProgrammingService {
@@ -11,6 +11,6 @@ public interface MealProgrammingService {
 
 	void createOrUpdate(List<MealProgrammingDto> dtos);
 
-	List<ConsolidatedIngredientSummaryDto> calculateIngredientsByMeals(List<Integer> mealIds);
+	List<MealMeasuredIngredientDto> calculateIngredientsByMeals(List<Integer> mealIds);
 
 }

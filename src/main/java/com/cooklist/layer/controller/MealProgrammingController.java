@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cooklist.bean.dto.ConsolidatedIngredientSummaryDto;
+import com.cooklist.bean.dto.MealMeasuredIngredientDto;
 import com.cooklist.bean.dto.MealProgrammingDto;
 import com.cooklist.config.exception.CockListException;
 import com.cooklist.config.exception.ExceptionType;
@@ -47,11 +47,11 @@ public class MealProgrammingController {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 
 	}
-	
+
 	@PostMapping("/calculate-ingredients-by-meals")
-	public List<ConsolidatedIngredientSummaryDto> calculateIngredientsByMeals(@RequestBody @NotEmpty List<Integer> mealIds) {
-		
-		for (Integer mealId: mealIds) {
+	public List<MealMeasuredIngredientDto> calculateIngredientsByMeals(@RequestBody @NotEmpty List<Integer> mealIds) {
+
+		for (Integer mealId : mealIds) {
 
 			if (Objects.isNull(mealId)) {
 
@@ -60,7 +60,7 @@ public class MealProgrammingController {
 			}
 
 		}
-		
+
 		return mealProgrammingService.calculateIngredientsByMeals(mealIds);
 	}
 

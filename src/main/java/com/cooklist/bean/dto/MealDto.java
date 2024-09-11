@@ -7,13 +7,10 @@ public class MealDto implements java.io.Serializable {
 	private static final long serialVersionUID = 2954989643024649705L;
 	private Integer id;
 	private String name;
-	private List<MealBodyDto> mealBodyDtos;
-
-	public MealDto() {
-	}
+	private List<MealMeasuredIngredientDto> mealMeasuredIngredientDtos;
 
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(Integer id) {
@@ -21,19 +18,19 @@ public class MealDto implements java.io.Serializable {
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public List<MealBodyDto> getMealBodyDtos() {
-		return mealBodyDtos;
+	public List<MealMeasuredIngredientDto> getMealMeasuredIngredientDtos() {
+		return mealMeasuredIngredientDtos;
 	}
 
-	public void setMealBodyDtos(List<MealBodyDto> mealBodyDtos) {
-		this.mealBodyDtos = mealBodyDtos;
+	public void setMealMeasuredIngredientDtos(List<MealMeasuredIngredientDto> mealMeasuredIngredientDtos) {
+		this.mealMeasuredIngredientDtos = mealMeasuredIngredientDtos;
 	}
 
 }

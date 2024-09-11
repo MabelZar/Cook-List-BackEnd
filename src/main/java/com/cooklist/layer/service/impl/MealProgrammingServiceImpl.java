@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
 
 import com.cooklist.bean.converter.BeanConverter;
 import com.cooklist.bean.dto.AppUserDto;
-import com.cooklist.bean.dto.ConsolidatedIngredientSummaryDto;
+import com.cooklist.bean.dto.MealMeasuredIngredientDto;
 import com.cooklist.bean.dto.MealProgrammingDto;
 import com.cooklist.bean.entity.MealProgrammingEntity;
-import com.cooklist.bean.entity.view.IngredientSummaryView;
+import com.cooklist.bean.entity.view.MealMeasuredIngredientView;
 import com.cooklist.layer.repository.MealProgrammingRepository;
 import com.cooklist.layer.service.AppUserService;
 import com.cooklist.layer.service.MealProgrammingService;
@@ -33,6 +33,10 @@ public class MealProgrammingServiceImpl implements MealProgrammingService {
 	@Autowired
 	@Qualifier("mealProgrammingConverter")
 	private BeanConverter<MealProgrammingEntity, MealProgrammingDto> mealProgrammingConverter;
+
+	@Autowired
+	@Qualifier("mealMeasuredIngredientConverter")
+	private BeanConverter<MealMeasuredIngredientView, MealMeasuredIngredientDto> mealMeasuredIngredientConverter;
 
 	@Override
 	public Integer findIdByData(MealProgrammingDto dto) {
@@ -69,35 +73,28 @@ public class MealProgrammingServiceImpl implements MealProgrammingService {
 	}
 
 	@Override
-	public List<ConsolidatedIngredientSummaryDto> calculateIngredientsByMeals(List<Integer> mealIds) {
+	public List<MealMeasuredIngredientDto> calculateIngredientsByMeals(List<Integer> mealIds) {
 
-		Map<Integer, ConsolidatedIngredientSummaryDto> consolidatedIngredientSummary = new HashMap<Integer, ConsolidatedIngredientSummaryDto>();
+		Map<Integer, MealMeasuredIngredientDto> mealMeasuredIngredientDtoMap = new HashMap<Integer, MealMeasuredIngredientDto>();
 
 		for (Integer mealId : mealIds) {
 
-			List<IngredientSummaryView> views = mealProgrammingRepository.calculateIngredients(mealId);
+			List<MealMeasuredIngredientView> views = mealProgrammingRepository.calculateIngredients(mealId);
 
-			for (IngredientSummaryView view : views) {
+			for (MealMeasuredIngredientView view : views) {
 
-				ConsolidatedIngredientSummaryDto dto = consolidatedIngredientSummary
+				MealMeasuredIngredientDto dto = mealMeasuredIngredientDtoMap
 						.getOrDefault(view.getMeasuredIngredientId(), null);
 
 				if (Objects.isNull(dto)) {
 
-					dto = new ConsolidatedIngredientSummaryDto();
-					dto.setMeasuredIngredientId(view.getMeasuredIngredientId());
-					dto.setIngredientId(view.getIngredientId());
-					dto.setIngredientName(view.getIngredientName());
-					dto.setMeasurementUnitId(view.getMeasurementUnitId());
-					dto.setMeasurementUnitName(view.getMeasurementUnitName());
-					dto.setMeasurementUnitSymbol(view.getMeasurementUnitSymbol());
-					dto.setQuantity(view.getQuantity());
+					dto = mealMeasuredIngredientConverter.convertToDto(view);
 
 				} else {
 					dto.setQuantity(dto.getQuantity() + view.getQuantity());
 				}
 
-				consolidatedIngredientSummary.put(view.getMeasuredIngredientId(), dto);
+				mealMeasuredIngredientDtoMap.put(view.getMeasuredIngredientId(), dto);
 			}
 
 		}
@@ -105,13 +102,14 @@ public class MealProgrammingServiceImpl implements MealProgrammingService {
 		final Integer quantityMembers = appUserService.getUserInSession().getQuantityMembers();
 
 		// LAMBDA
-		return consolidatedIngredientSummary.values().stream().map(summary -> {
+		return mealMeasuredIngredientDtoMap.values().stream().map(dto -> {
 
-			BigDecimal consolidatedQuantity = new BigDecimal(summary.getQuantity() * quantityMembers).setScale(3, RoundingMode.HALF_UP);
+			BigDecimal consolidatedQuantity = new BigDecimal(dto.getQuantity() * quantityMembers).setScale(3,
+					RoundingMode.HALF_UP);
 
-			summary.setQuantity(consolidatedQuantity.doubleValue());
-			
-			return summary;
+			dto.setQuantity(consolidatedQuantity.doubleValue());
+
+			return dto;
 
 		}).toList();
 	}
