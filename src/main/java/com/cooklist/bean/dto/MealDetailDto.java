@@ -1,14 +1,12 @@
 package com.cooklist.bean.dto;
 
-import java.math.BigDecimal;
-
 public class MealDetailDto implements java.io.Serializable {
 
 	private static final long serialVersionUID = -9161538630754711376L;
 	private Integer id;
 	private MealDto meal;
 	private MeasuredIngredientDto measuredIngredient;
-	private BigDecimal quantity;
+	private Double quantity;
 
 	public MealDetailDto() {
 	}
@@ -37,11 +35,11 @@ public class MealDetailDto implements java.io.Serializable {
 		this.measuredIngredient = measuredIngredient;
 	}
 
-	public BigDecimal getQuantity() {
+	public Double getQuantity() {
 		return this.quantity;
 	}
 
-	public void setQuantity(BigDecimal quantity) {
+	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
 	}
 

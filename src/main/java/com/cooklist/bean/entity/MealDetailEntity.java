@@ -69,7 +69,7 @@ public class MealDetailEntity implements java.io.Serializable {
 		this.measuredIngredient = measuredIngredient;
 	}
 
-	@Column(name = "quantity", nullable = false, precision = 10, scale = 2)
+	@Column(name = "quantity", nullable = false, precision = 10, scale = 3)
 	public BigDecimal getQuantity() {
 		return this.quantity;
 	}
