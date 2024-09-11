@@ -4,6 +4,7 @@ package com.cooklist.bean.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -49,7 +50,7 @@ public class IngredientEntity implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ingredient")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ingredient", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	public Set<MeasuredIngredientEntity> getMeasuredIngredients() {
 		return this.measuredIngredients;
 	}

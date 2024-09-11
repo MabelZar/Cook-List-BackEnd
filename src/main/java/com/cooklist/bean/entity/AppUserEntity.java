@@ -4,6 +4,7 @@ package com.cooklist.bean.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -95,7 +96,7 @@ public class AppUserEntity implements java.io.Serializable {
 		this.password = password;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	public Set<MealProgrammingEntity> getMealProgrammings() {
 		return this.mealProgrammings;
 	}
