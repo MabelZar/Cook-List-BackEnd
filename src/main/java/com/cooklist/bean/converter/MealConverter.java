@@ -1,13 +1,12 @@
-package com.cooklist.bean.converter.impl;
+package com.cooklist.bean.converter;
 
 import org.springframework.stereotype.Component;
 
-import com.cooklist.bean.converter.ABeanConverter;
 import com.cooklist.bean.dto.MealDto;
 import com.cooklist.bean.entity.MealEntity;
 
 @Component("mealConverter")
-public class MealConverterImpl extends ABeanConverter<MealEntity, MealDto> {
+public class MealConverter extends BeanConverterImpl<MealEntity, MealDto> {
 
 	@Override
 	protected void populateDto(MealDto dto, MealEntity entity) {

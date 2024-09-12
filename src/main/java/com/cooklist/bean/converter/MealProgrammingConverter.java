@@ -1,11 +1,9 @@
-package com.cooklist.bean.converter.impl;
+package com.cooklist.bean.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.cooklist.bean.converter.ABeanConverter;
-import com.cooklist.bean.converter.BeanConverter;
 import com.cooklist.bean.dto.AppUserDto;
 import com.cooklist.bean.dto.MealDto;
 import com.cooklist.bean.dto.MealProgrammingDto;
@@ -14,15 +12,15 @@ import com.cooklist.bean.entity.MealEntity;
 import com.cooklist.bean.entity.MealProgrammingEntity;
 
 @Component("mealProgrammingConverter")
-public class MealProgrammingConverterImpl extends ABeanConverter<MealProgrammingEntity, MealProgrammingDto> {
+public class MealProgrammingConverter extends BeanConverterImpl<MealProgrammingEntity, MealProgrammingDto> {
 
 	@Autowired
 	@Qualifier("appUserConverter")
-	BeanConverter<AppUserEntity, AppUserDto> appUserConverter;
+	private BeanConverter<AppUserEntity, AppUserDto> appUserConverter;
 
 	@Autowired
 	@Qualifier("mealConverter")
-	BeanConverter<MealEntity, MealDto> mealConverter;
+	private BeanConverter<MealEntity, MealDto> mealConverter;
 
 	@Override
 	protected void populateDto(MealProgrammingDto dto, MealProgrammingEntity entity) {

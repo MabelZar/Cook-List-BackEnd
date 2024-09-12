@@ -1,5 +1,6 @@
 package com.cooklist.layer.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,11 @@ import org.springframework.stereotype.Service;
 import com.cooklist.bean.converter.BeanConverter;
 import com.cooklist.bean.dto.MealDto;
 import com.cooklist.bean.dto.MealMeasuredIngredientDto;
+import com.cooklist.bean.entity.MealDetailEntity;
 import com.cooklist.bean.entity.MealEntity;
+import com.cooklist.bean.entity.MeasuredIngredientEntity;
 import com.cooklist.bean.entity.view.MealMeasuredIngredientView;
+import com.cooklist.layer.repository.MealDetailRepository;
 import com.cooklist.layer.repository.MealProgrammingRepository;
 import com.cooklist.layer.repository.MealRepository;
 import com.cooklist.layer.service.MealService;
@@ -22,6 +26,9 @@ public class MealServiceImpl implements MealService {
 
 	@Autowired
 	private MealRepository mealRepository;
+
+	@Autowired
+	private MealDetailRepository mealDetailRepository;
 
 	@Autowired
 	private MealProgrammingRepository mealProgrammingRepository;
@@ -77,6 +84,27 @@ public class MealServiceImpl implements MealService {
 
 	@Override
 	public void createOrUpdate(MealDto dto) {
+
+		MealEntity mealEntity = mealConverter.convertToEntity(dto);
+
+		mealRepository.saveAndFlush(mealEntity);
+
+		mealDetailRepository.deleteAll(mealEntity.getMealDetails());
+		
+		for (MealMeasuredIngredientDto mmiDto : dto.getMealMeasuredIngredientDtos()) {
+
+			MealDetailEntity mealDetailEntity = new MealDetailEntity();
+			
+			MeasuredIngredientEntity measuredIngredientEntity = new MeasuredIngredientEntity();
+			measuredIngredientEntity.setId(mmiDto.getMeasuredIngredientId());
+
+			mealDetailEntity.setQuantity(new BigDecimal(mmiDto.getQuantity()));
+			mealDetailEntity.setMeasuredIngredient(measuredIngredientEntity);
+			mealDetailEntity.setMeal(mealEntity);
+
+			mealDetailRepository.saveAndFlush(mealDetailEntity);
+
+		}
 
 	}
 

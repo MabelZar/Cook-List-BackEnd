@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import org.apache.commons.collections4.CollectionUtils;
 
-public abstract class ABeanConverter<ENT, DTO> implements BeanConverter<ENT, DTO> {
+public abstract class BeanConverterImpl<ENT, DTO> implements BeanConverter<ENT, DTO> {
 
 	protected abstract void populateDto(DTO dto, ENT entity);
 

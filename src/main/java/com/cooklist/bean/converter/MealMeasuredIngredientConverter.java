@@ -1,14 +1,13 @@
-package com.cooklist.bean.converter.impl;
+package com.cooklist.bean.converter;
 
 import org.springframework.stereotype.Component;
 
-import com.cooklist.bean.converter.ABeanConverter;
 import com.cooklist.bean.dto.MealMeasuredIngredientDto;
 import com.cooklist.bean.entity.view.MealMeasuredIngredientView;
 
 @Component("mealMeasuredIngredientConverter")
 public class MealMeasuredIngredientConverter
-		extends ABeanConverter<MealMeasuredIngredientView, MealMeasuredIngredientDto> {
+		extends BeanConverterImpl<MealMeasuredIngredientView, MealMeasuredIngredientDto> {
 
 	@Override
 	protected void populateDto(MealMeasuredIngredientDto dto, MealMeasuredIngredientView view) {

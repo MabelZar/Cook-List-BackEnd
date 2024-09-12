@@ -1,4 +1,4 @@
-package com.cooklist.config;
+package com.cooklist.config.exception;
 
 import java.util.Objects;
 
@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import com.cooklist.config.exception.CockListException;
 
 @ControllerAdvice
 public class CockListExceptionHandler extends ResponseEntityExceptionHandler {
