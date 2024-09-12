@@ -58,7 +58,7 @@ IDE(Eclipce)
 
 Clonar el repositorio  
 
-git clone https://github.com/tuusuario/Cook-List-BackEnd.git  
+`git clone https://github.com/tuusuario/Cook-List-BackEnd.git`   
 
 # Back-end  
 
@@ -67,28 +67,40 @@ git clone https://github.com/tuusuario/Cook-List-BackEnd.git
 1. Crea una base de datos en PostgreSQL  
 
 2. Modifica las propiedades de conexión en el archivo application.properties  
+```
+spring.datasource.url=jdbc:postgresql://localhost:5432/nombre_de_tu_base_de_datos
+spring.datasource.username=tu_usuario
+spring.datasource.password=tu_contraseña
+```  
 
-spring.datasource.url=jdbc:postgresql://localhost:5432/nombre_de_tu_base_de_datos spring.datasource.username=tu_usuario spring.datasource.password=tu_contraseña Construir y ejecutar el back-end:  
-
-3. cd cook-list-backend mvn clean install mvn spring-boot:run  
+Construir y ejecutar el back-end:  
+```
+cd cook-list-backend
+mvn clean install
+mvn spring-boot:run
+```  
 
 # Front-end  
 
 Configuración del Front-End  
 
 1. Instalar dependencias del Front-end  
-
-cd cook-list-frontend npm install npm start o npm run dev   
+```
+cd cook-list-frontend
+npm install
+npm start
+o npm run dev
+```  
 
 # Contribución 🤝   
 
 1. Haz un fork al repositorio.  
 
-2. Crea una nueva rama: git checkout -b feature/name.  
+2. Crea una nueva rama: `git checkout -b feature/name.`   
 
 3. Haz tus cambios.  
 
-4. Haz push de tu rama: git push origin feature/name.  
+4. Haz push de tu rama: `git push origin feature/name.`  
 
 5. Crea un pull request.  
 
